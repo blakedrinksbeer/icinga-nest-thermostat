@@ -1,9 +1,12 @@
 #!/usr/bin/python3
 
-import requests,argparse,sys,json
+import requests,argparse,sys
 
 '''
-This will need to be re-run when the OAuth token expires.
+Create a token which can be used in config.yaml
+As of the time of writing this, they expire every 10 years.
+
+This is terrifying, right?
 
 If you need help getting started with the Nest API, see
 this document from Google:
@@ -18,7 +21,6 @@ parser = argparse.ArgumentParser(description="Setup OAuth token for Nest user.")
 parser.add_argument("-i",metavar="client_id",required=True,help="Client ID for OAuth.")
 parser.add_argument("-s",metavar="secret",required=True,help="Client Secret for OAuth.")
 parser.add_argument("-p",metavar="pin",required=True,help="PIN Authorization for account.")
-parser.add_argument("-n",metavar="name",help="Friendly name.")
 args = parser.parse_args()
 
 if args.n:
@@ -40,8 +42,5 @@ if r.status_code != 200:
     print(r.content)
     sys.exit(3)
 
-with open(filename,"w") as f:
-    f.write(json.dumps(r.json()))
-
-print(f"{filename} written successfully.")
-    
+j = r.json()
+print(j['access_token'])    

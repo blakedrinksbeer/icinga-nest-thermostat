@@ -1,0 +1,6 @@
+# Token for nest to work
+nest_token: token
+
+# Weather module specific data below.
+owm_api_key: apikey
+owm_city_id: cityid
