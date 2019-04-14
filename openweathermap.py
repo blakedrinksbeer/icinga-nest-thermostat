@@ -18,4 +18,4 @@ def weather(config,unit):
     humidity = w['main']['humidity']
     temperature = w['main']['temp']
     
-    return(f'outside_humidity={humidity};;0;100 outside_temp={temperature} ')
+    return(f'outside_humidity={humidity}%;;;0;100 outside_temp={temperature} ')

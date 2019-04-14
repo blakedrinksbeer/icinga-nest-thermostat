@@ -17,6 +17,8 @@ args = parser.parse_args()
 # Load the relevant weather module.
 if args.w == 'openweathermap':
     from openweathermap import weather
+elif args.w == 'weathergov':
+    from weathergov import weather
 
 if args.c:
     configfile = args.c
@@ -25,7 +27,7 @@ else:
 
 try:
     with open(configfile,'r') as f:
-        config = yaml.load(f.read())
+        config = yaml.safe_load(f.read())
 
     token = config['nest_token']
     headers = {
@@ -90,16 +92,19 @@ humidity = ti['humidity']
 hvacmode = ti['hvac_mode']
 
 perfdata = f"humidity={humidity}%;;;0;100 ambient={ambient} "
+output = f'{ambient} degress. Set to {hvacmode.upper()}, '
 
 if ti['hvac_state'] == 'off':
-    perfdata += "hvacstate=0 "
+    perfdata += "hvacstate=0;;;0;1 "
+    output += "currently idle. "
 else:
-    perfdata += "hvacstate=1 "
+    perfdata += "hvacstate=1;;;0;1 "
+    output += "currently running."
 
 if structure['away'] == 'home':
-    perfdata += "home=1 "
+    perfdata += "home=1;;;0;1 "
 else:
-    perfdata += "home=0 "
+    perfdata += "home=0;;;0;1 "
     
 if hvacmode == 'eco':
     ecolow = ti[f'eco_temperature_low_{u}']
@@ -117,4 +122,4 @@ if args.w:
     currentweather = weather(config,ti['temperature_scale'])
     perfdata += currentweather
     
-print(perfdata)
+print(f'{output}|{perfdata}')

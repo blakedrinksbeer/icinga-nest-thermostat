@@ -2,5 +2,10 @@
 nest_token: token
 
 # Weather module specific data below.
+
+# openweathermap openweathermap.com
 owm_api_key: apikey
 owm_city_id: cityid
+
+# weather_gov weather.gov
+wgov_station: KBOS # For Boston Logan Airport
