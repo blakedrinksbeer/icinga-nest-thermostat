@@ -75,7 +75,7 @@ for t in structure['thermostats']:
     if not args.n:
         ti = thermostats[t]
         break
-    elif thermostats[t]['where_name'] == args.n:
+    elif thermostats[t]['name'] == args.n:
         ti = thermostats[t]
     
 if not ti:
