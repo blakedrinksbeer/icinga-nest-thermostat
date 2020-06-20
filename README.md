@@ -1,6 +1,8 @@
 # icinga-nest-thermostat
 
+## RIP: Google discontinued Works With Nest and have not yet released developer API for individuals on the new Works With Google Assistant program. I'll start a new project when they do, but this one is dead.
 
+---
 An Icinga/Nagios compatible plugin for monitoring ambient/outdoor temperatures and comparing them against current thermostat settings. Ideally this is to be used with a time series database such as Graphite/Carbon for graphing.
 
 ![nest-graphite.png](https://www.blakehartshorn.com/gitea/local/nest-graphite.png)
